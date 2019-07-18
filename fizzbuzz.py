@@ -37,16 +37,19 @@ def binary_encode(x: int) -> List[int]:
     """
     return [x >> i & 1 for i in range(10)]
 
+# Mapping. We expect to see targets[i] given inputs[i].
 inputs = np.array([
     binary_encode(x)
     for x in range(101, 1024)
 ])
 
+# Mapping. We expect to see targets[i] given inputs[i].
 targets = np.array([
     fizz_buzz_encode(x)
     for x in range(101, 1024)
 ])
 
+# Simple MLP net. 
 net = NeuralNet([
     Linear(input_size=10, output_size=50),
     Tanh(),
@@ -59,6 +62,7 @@ train(net,
       num_epochs=5000,
       optimizer=SGD(lr=0.001))
 
+# Testing FizzBuzz net on values from 1 to 100.
 for x in range(1, 101):
     predicted = net.forward(binary_encode(x))
     predicted_idx = np.argmax(predicted)

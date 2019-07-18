@@ -15,6 +15,9 @@ def train(net: NeuralNet,
           iterator: DataIterator = BatchIterator(),
           loss: Loss = MSE(), 
           optimizer: Optimizer = SGD()) -> None:
+    """
+    Train the neural network on the inputs/targets data. 
+    """
     for epoch in range(num_epochs):
         epoch_loss = 0.0
         for batch in iterator(inputs, targets):

@@ -10,6 +10,7 @@ from dl_lib.train import train
 from dl_lib.neural_net import NeuralNet
 from dl_lib.layers import Linear, Tanh
 
+# Mapping. We expect to see targets[i] given inputs[i].
 inputs = np.array([
     [0, 0],
     [1, 0],
@@ -17,6 +18,7 @@ inputs = np.array([
     [1, 1]
 ])
 
+# Mapping. We expect to see targets[i] given inputs[i].
 targets = np.array([
     [1, 0], 
     [0, 1],
@@ -25,6 +27,7 @@ targets = np.array([
 ])
 
 
+# Simple MLP net.
 net = NeuralNet([
     Linear(input_size=2, output_size=2),
     Tanh(),

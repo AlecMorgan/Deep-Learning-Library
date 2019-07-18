@@ -94,9 +94,16 @@ class Activation(Layer):
 
     
 def tanh(x: Tensor) -> Tensor:
+    """
+    Apply the hyperbolic tangent function to the
+    input tensor element-wise and return the result.
+    """
     return np.tanh(x)
 
 def tanh_prime(x: Tensor) -> Tensor:
+    """
+    Return the derivative of the input's hyperbolic tangent.
+    """
     y = tanh(x)
     return 1 - y ** 2
 

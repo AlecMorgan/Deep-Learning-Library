@@ -11,6 +11,9 @@ from dl_lib.tensor import Tensor
 # Abstract base class for loss type implementations.
 class Loss: 
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
+        """
+        Calculate the error for between predicted and actual values.
+        """
         raise NotImplementedError
 
     def grad(self, predicted: Tensor, actual: Tensor) -> Tensor:
@@ -18,7 +21,9 @@ class Loss:
 
 
 class MSE(Loss):
-    """Evaluates a model by MSE (Mean Squared Error)."""
+    """
+    Evaluates a model by MSE (Mean Squared Error).
+    """
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
         return np.sum((predicted - actual) ** 2)
 

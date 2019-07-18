@@ -19,6 +19,9 @@ class BatchIterator(DataIterator):
         self.shuffle = shuffle
         
     def __call__(self, inputs: Tensor, targets: Tensor) -> Iterator[Batch]:
+        """
+        Produce a BatchIterator object.
+        """
         starts = np.arange(0, len(inputs), self.batch_size)
         if self.shuffle:
             np.random.shuffle(starts)

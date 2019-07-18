@@ -15,6 +15,9 @@ class NeuralNet:
         self.layers = layers
 
     def forward(self, inputs: Tensor) -> Tensor:
+        """
+        Forward-propagate inputs through layers.
+        """
         for layer in self.layers:
             inputs = layer.forward(inputs)
         return inputs
@@ -25,6 +28,10 @@ class NeuralNet:
         return grad
 
     def params_and_grads(self) -> Iterator[Tuple[Tensor, Tensor]]:
+        """
+        Yield weight/bias parameters and their error gradients for
+        all layers throughout the neural network. 
+        """
         for layer in self.layers:
             if isinstance(layer, Activation) is not True:
                 for name, param in layer.params.items():
