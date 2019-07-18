@@ -1,4 +1,6 @@
 """
+Demo: solving FizzBuzz with an MLP (Multi-Layer Perceptron)
+
 FizzBuzz is the following problem:
 
 For each of the numbers 1 to 100:
@@ -10,12 +12,15 @@ For each of the numbers 1 to 100:
 
 import numpy as np 
 from typing import List
-from lib.train import train
-from lib.neural_net import NeuralNet
-from lib.layers import Linear, Tanh
-from lib.optim import SGD
+from dl_lib.train import train
+from dl_lib.neural_net import NeuralNet
+from dl_lib.layers import Linear, Tanh
+from dl_lib.optim import SGD
 
 def fizz_buzz_encode(x: int) -> List[int]:
+    """
+    Return a categorical encoding of a correct FizzBuzz output.
+    """
     if x % 15 == 0:
         return [0, 0, 0, 1]
     elif x % 5 == 0:

@@ -1,12 +1,14 @@
 """
+Demo: solving XOR with an MLP (Multi-Layer Perceptron)
+
 XOR is the canonical example of a function that 
 cannot be learned by a linear model because
 it is not linearly separable.
 """
 import numpy as np 
-from lib.train import train
-from lib.neural_net import NeuralNet
-from lib.layers import Linear, Tanh
+from dl_lib.train import train
+from dl_lib.neural_net import NeuralNet
+from dl_lib.layers import Linear, Tanh
 
 inputs = np.array([
     [0, 0],
