@@ -7,7 +7,7 @@ gence of the neural network.
 """
 from typing import Sequence, Iterator, Tuple
 from tensor import Tensor
-from layers import Layer
+from layers import Layer, Activation
 
 
 class NeuralNet:
@@ -26,6 +26,7 @@ class NeuralNet:
 
     def params_and_grads(self) -> Iterator[Tuple[Tensor, Tensor]]:
         for layer in self.layers:
-            for name, param in layer.params.items():
-                grad = layer.grads[name]
-                yield param, grad
+            if isinstance(layer, Activation) is not True:
+                for name, param in layer.params.items():
+                    grad = layer.grads[name]
+                    yield param, grad
