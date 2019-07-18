@@ -4,9 +4,9 @@ cannot be learned by a linear model because
 it is not linearly separable.
 """
 import numpy as np 
-from train import train
-from neural_net import NeuralNet
-from layers import Linear, Tanh
+from lib.train import train
+from lib.neural_net import NeuralNet
+from lib.layers import Linear, Tanh
 
 inputs = np.array([
     [0, 0],

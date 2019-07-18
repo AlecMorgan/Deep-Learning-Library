@@ -10,10 +10,10 @@ For each of the numbers 1 to 100:
 
 import numpy as np 
 from typing import List
-from train import train
-from neural_net import NeuralNet
-from layers import Linear, Tanh
-from optim import SGD
+from lib.train import train
+from lib.neural_net import NeuralNet
+from lib.layers import Linear, Tanh
+from lib.optim import SGD
 
 def fizz_buzz_encode(x: int) -> List[int]:
     if x % 15 == 0:
