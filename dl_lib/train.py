@@ -6,6 +6,7 @@ from dl_lib.neural_net import NeuralNet
 from dl_lib.loss import Loss, MSE
 from dl_lib.optim import Optimizer, SGD
 from dl_lib.data import DataIterator, BatchIterator
+from tqdm import tqdm
 
 
 def train(net: NeuralNet, 
@@ -18,7 +19,8 @@ def train(net: NeuralNet,
     """
     Train the neural network on the inputs/targets data. 
     """
-    for epoch in range(num_epochs):
+    epoch_losses = []
+    for epoch in tqdm(range(num_epochs)):
         epoch_loss = 0.0
         for batch in iterator(inputs, targets):
             predicted = net.forward(batch.inputs)
@@ -26,4 +28,5 @@ def train(net: NeuralNet,
             grad = loss.grad(predicted, batch.targets)
             net.backward(grad)
             optimizer.step(net)
-        print(epoch, epoch_loss)
+        epoch_losses.append(epoch_loss)
+    return epoch_losses
