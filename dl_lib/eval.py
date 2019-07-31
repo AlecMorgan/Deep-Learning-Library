@@ -20,11 +20,10 @@ def score_accuracy(targets: Tensor,
                    mode: str = "classification",
                    thres: float = 0.5) -> float:
     """
-    Evaluate the neural network's accuracy performance.
+    Evaluate the neural network's accuracy performance. 
     """
     if mode == "classification":
-        predictions = map(lambda n: 1 if n > thres else 0, predictions)
-        predictions = np.array(list(predictions))
+        predictions = (predictions > thres).astype(int)
         score = (predictions == targets).sum()
     elif mode == "regression":
         raise NotImplementedError

@@ -111,3 +111,36 @@ def tanh_prime(x: Tensor) -> Tensor:
 class Tanh(Activation):
     def __init__(self):
         super().__init__(tanh, tanh_prime)
+
+
+def relu(x: Tensor) -> Tensor:
+    """
+    Apply the ReLU function to the input
+    tensor element-wise and return the result.
+    """
+    # If the element is negative, it becomes 0.
+    # Otherwise it stays the same. Therefore, 
+    # taking the maximum of each element and 0
+    # is a sufficient implementation.
+    return np.maximum(x, 0)
+
+def relu_prime(x: Tensor) -> Tensor:
+    """
+    Return the derivative of the input's ReLU.
+    """
+    raise NotImplementedError
+
+def leaky_relu(x: Tensor, neg_slope: float = .01) -> Tensor: 
+    """
+    Apply the leaky ReLU function to the input
+    tensor element-wise and return the result. 
+    Leaky ReLU is a mitigation to the "dying 
+    ReLU" problem. 
+    """
+    return np.maximum(x, x * neg_slope)
+
+def leaky_relu_prime(x: Tensor) -> Tensor:
+    """
+    Return the derivative of the input's ReLU.
+    """
+    raise NotImplementedError
