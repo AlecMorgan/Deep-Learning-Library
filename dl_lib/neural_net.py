@@ -8,6 +8,7 @@ gence of the neural network.
 from typing import Sequence, Iterator, Tuple
 from dl_lib.tensor import Tensor
 from dl_lib.layers import Layer, Activation
+import numpy as np
 
 
 class NeuralNet:
@@ -37,3 +38,30 @@ class NeuralNet:
                 for name, param in layer.params.items():
                     grad = layer.grads[name]
                     yield param, grad
+
+    def predict(self, inputs: Tensor, 
+                mode: str = "regression",
+                cls_thres: float = None,
+                n_labels: int = None) -> Tensor:
+        """
+        Feed inputs through network and produce predictions.
+        Valid modes are "regression", "classification", and
+        "labeling". Classification and labeling modes will
+        set positive class(es) to 1 and all others to 0. 
+        """
+        predictions = self.forward(Tensor)
+        if mode is "regression":
+            return predictions
+        if mode is "classification":
+            if cls_thres == None:
+                raise ValueError
+            pass
+        if mode is "labeling":
+            if cls_thres == None:
+                raise ValueError
+            if n_labels == None:
+                raise ValueError
+                
+            predictions[predictions < cls_thres] = 0
+            predictions[predictions >= cls_thres] = 1
+            return predictions
