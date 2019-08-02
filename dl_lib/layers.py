@@ -128,19 +128,44 @@ def relu_prime(x: Tensor) -> Tensor:
     """
     Return the derivative of the input's ReLU.
     """
-    raise NotImplementedError
+    x[x <= 0] = 0
+    x[x > 0] = 1
+    return x
+
+class Relu(Activation):
+    def __init__(self):
+        super().__init__(relu, relu_prime)
 
 def leaky_relu(x: Tensor, neg_slope: float = .01) -> Tensor: 
     """
     Apply the leaky ReLU function to the input
     tensor element-wise and return the result. 
-    Leaky ReLU is a mitigation to the "dying 
-    ReLU" problem. 
     """
+    # Leaky ReLU mitigates the "dying ReLU" problem
+    # by keeping negative values slightly negative.
     return np.maximum(x, x * neg_slope)
 
-def leaky_relu_prime(x: Tensor) -> Tensor:
+def leaky_relu_prime(x: Tensor, neg_slope: float = .01) -> Tensor:
     """
-    Return the derivative of the input's ReLU.
+    Return the derivative of the input's leaky ReLU.
     """
-    raise NotImplementedError
+    x[x <= 0] = neg_slope
+    x[x > 0] = 1
+    return x
+
+class Leaky_Relu(Activation):
+    def __init__(self):
+        super().__init__(leaky_relu, leaky_relu_prime)
+
+    def forward(self, inputs: Tensor) -> Tensor:
+        self.inputs = inputs
+        return self.f(inputs)
+
+    def backward(self, grad: Tensor) -> Tensor:
+        """ 
+        if y = f(x) and x = g(z)
+        then dy/dz = f'(x) * g'(z).
+        This is simply the chain rule
+        applied element-wise.
+        """
+        return self.f_prime(self.inputs) * grad
