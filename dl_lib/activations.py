@@ -1,4 +1,4 @@
-from tensor import Tensor
+from dl_lib.tensor import Tensor
 import numpy as np
 
 def tanh(x: Tensor) -> Tensor:

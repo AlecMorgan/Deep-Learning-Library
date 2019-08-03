@@ -12,7 +12,7 @@ inputs -> Linear -> Tanh -> Linear -> output
 from typing import Dict, Callable
 import numpy as np
 from dl_lib.tensor import Tensor
-from activations import (
+from dl_lib.activations import (
     tanh, tanh_prime, relu, relu_prime, 
     leaky_relu, leaky_relu_prime
 )
