@@ -23,6 +23,7 @@ def binary_encode(x: int) -> List[int]:
     """
     return [x >> i & 1 for i in range(10)]
 
+
 def plot_tangent_lines(ax, x, y, m, line_scale=.5):
     # Radians of all three corners
     angle_c = pi / 2
