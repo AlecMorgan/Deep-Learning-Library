@@ -2,6 +2,7 @@
 Helper functions for demo notebooks.
 """
 from typing import List
+from math import atan, sin, pi, sqrt
 
 def fizz_buzz_encode(x: int) -> List[int]:
     """
@@ -25,6 +26,9 @@ def binary_encode(x: int) -> List[int]:
 
 
 def plot_tangent_lines(ax, x, y, m, line_scale=.5):
+    """
+    Plot a tangent line given an (x, y) point and a slope.
+    """
     # Radians of all three corners
     angle_c = pi / 2
     angle_a = atan(m)
