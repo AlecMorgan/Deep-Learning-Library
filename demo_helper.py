@@ -47,8 +47,13 @@ def plot_activation_function(func, func_prime, plot_scale, tangent_points=[]):
     # Plotting our activation function
     X = np.linspace(-1 * plot_scale, plot_scale)
     y = func(X)
+    round_list = lambda l: [round(n, 4) for n in l]
+    print(round_list(y))
     fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(5 * plot_scale, 10))
+    # TODO(Alec): Fix ylim setting bug.
+    plt.ylim(-1, 1)
     axes[0].plot(X, y, color="red")
+    plt.ylim(-1, 1)
     axes[1].plot(X, y, color="red")
 
     # Plotting our tangent lines
@@ -64,6 +69,8 @@ def plot_tangent_lines(ax, x, y, m, line_scale=.5):
     """
     Plot a tangent line given an (x, y) point and a slope.
     """
+    # TODO(Alec): Fix tangent drawing on (leaky) relu.
+    
     # Radians of all three corners
     angle_c = pi / 2
     angle_a = atan(m)

@@ -39,7 +39,7 @@ def relu_prime(x: Tensor) -> Tensor:
     return x
 
 
-def leaky_relu(x: Tensor, neg_slope: float = .01) -> Tensor: 
+def leaky_relu(x: Tensor, neg_slope: float = .1) -> Tensor: 
     """
     Apply the leaky ReLU function to the input
     tensor element-wise and return the result. 
@@ -49,7 +49,7 @@ def leaky_relu(x: Tensor, neg_slope: float = .01) -> Tensor:
     return np.maximum(x, x * neg_slope)
 
 
-def leaky_relu_prime(x: Tensor, neg_slope: float = .01) -> Tensor:
+def leaky_relu_prime(x: Tensor, neg_slope: float = .1) -> Tensor:
     """
     Return the derivative of the input's leaky ReLU.
     """
