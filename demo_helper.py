@@ -2,7 +2,9 @@
 Helper functions for demo notebooks.
 """
 from typing import List
+import numpy as np
 from math import atan, sin, pi, sqrt
+import matplotlib.pyplot as plt
 
 def fizz_buzz_encode(x: int) -> List[int]:
     """
@@ -23,6 +25,39 @@ def binary_encode(x: int) -> List[int]:
     10 digit binary encoding of x
     """
     return [x >> i & 1 for i in range(10)]
+    
+    
+def plot_activation_function(func, func_prime, plot_scale, tangent_points=[]):
+    """
+    Plots a function in two subplots, one with and one without tangent lines.
+    
+    Parameters
+    ----------
+    func : callable
+        The function being plotted.
+    func_prime : callable
+        Function that returns the derivative of a given point for this function.
+    plot_scale : float or int
+        How large to make the plot/how far to extend away from 0 on the x axis.
+    tangent_points : iterable, optional
+        The x coordinantes at which to draw each tangent line.
+    """
+    # %matplotlib inline
+    plt.style.use("dark_background")
+    
+    # Plotting our activation function
+    X = np.linspace(-1 * plot_scale, plot_scale)
+    y = func(X)
+    fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(5 * plot_scale, 10))
+    axes[0].plot(X, y, color="red")
+    axes[1].plot(X, y, color="red")
+
+    # Plotting our tangent lines
+    for x in tangent_points:
+        # Each tangent point is the x coord of a tangent line
+        y = func(x)
+        m = func_prime(x)
+        plot_tangent_lines(axes[1], x, y, m)
 
 
 def plot_tangent_lines(ax, x, y, m, line_scale=.5):
