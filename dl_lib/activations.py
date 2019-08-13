@@ -1,6 +1,7 @@
 from dl_lib.tensor import Tensor
 import numpy as np
 
+
 def tanh(x: Tensor) -> Tensor:
     """
     Apply the hyperbolic tangent function to the
@@ -8,12 +9,14 @@ def tanh(x: Tensor) -> Tensor:
     """
     return np.tanh(x)
 
+
 def tanh_prime(x: Tensor) -> Tensor:
     """
     Return the derivative of the input's hyperbolic tangent.
     """
     y = tanh(x)
     return 1 - y ** 2
+
 
 def relu(x: Tensor) -> Tensor:
     """
@@ -26,6 +29,7 @@ def relu(x: Tensor) -> Tensor:
     # is a sufficient implementation.
     return np.maximum(x, 0)
 
+
 def relu_prime(x: Tensor) -> Tensor:
     """
     Return the derivative of the input's ReLU.
@@ -34,14 +38,16 @@ def relu_prime(x: Tensor) -> Tensor:
     x[x > 0] = 1
     return x
 
+
 def leaky_relu(x: Tensor, neg_slope: float = .01) -> Tensor: 
     """
     Apply the leaky ReLU function to the input
     tensor element-wise and return the result. 
+    Leaky ReLU mitigates the "dying ReLU" problem
+    by keeping negative values slightly negative.
     """
-    # Leaky ReLU mitigates the "dying ReLU" problem
-    # by keeping negative values slightly negative.
     return np.maximum(x, x * neg_slope)
+
 
 def leaky_relu_prime(x: Tensor, neg_slope: float = .01) -> Tensor:
     """

@@ -42,7 +42,6 @@ def plot_activation_function(func, func_prime, plot_scale, tangent_points=[]):
     tangent_points : iterable, optional
         The x coordinantes at which to draw each tangent line.
     """
-    # %matplotlib inline
     plt.style.use("dark_background")
     
     # Plotting our activation function
@@ -55,6 +54,7 @@ def plot_activation_function(func, func_prime, plot_scale, tangent_points=[]):
     # Plotting our tangent lines
     for x in tangent_points:
         # Each tangent point is the x coord of a tangent line
+        x = np.asarray(x)
         y = func(x)
         m = func_prime(x)
         plot_tangent_lines(axes[1], x, y, m)
