@@ -67,9 +67,9 @@ def plot_tangent_lines(ax, x, y, m, line_scale=.5):
     """
     Plot a tangent line given an (x, y) point and a slope.
     """
-    # TODO(Alec): Fix tangent drawing on (leaky) relu.
     
     # Radians of all three corners
+    print(x, m)
     angle_c = pi / 2
     angle_a = atan(m)
     angle_b = angle_c - angle_a
@@ -82,7 +82,4 @@ def plot_tangent_lines(ax, x, y, m, line_scale=.5):
     # Coordinates of points on each line
     tangent_x = [x - b, x + b]
     tangent_y = [y - a, y + a]
-    round_list = lambda l: [round(n, 4) for n in l]
-    print(f"Tangent X: {round_list(tangent_x)}")
-    print(f"Tangent Y: {round_list(tangent_y)}")
     ax.plot(tangent_x, tangent_y, color="blue");
