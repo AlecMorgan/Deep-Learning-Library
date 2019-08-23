@@ -35,8 +35,8 @@ def relu_prime(x: Tensor) -> Tensor:
     Return the derivative of the input's ReLU.
     """
     y = x.astype(float)
-    y[y < 0] = 0
     y[y > 0] = 1
+    y[y <= 0] = 0
     return y
 
 
@@ -56,7 +56,7 @@ def leaky_relu_prime(x: Tensor, neg_slope: float = .1) -> Tensor:
     """
     y = x.astype(float)
     y[y > 0] = 1
-    y[y < 0] = neg_slope
+    y[y <= 0] = neg_slope
     return y
 
 
