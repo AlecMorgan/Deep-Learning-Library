@@ -8,6 +8,7 @@ gence of the neural network.
 from typing import Sequence, Iterator, Tuple
 from dl_lib.tensor import Tensor
 from dl_lib.layers import Layer, Activation
+import numpy as np
 
 
 class NeuralNet:
@@ -37,3 +38,9 @@ class NeuralNet:
                 for name, param in layer.params.items():
                     grad = layer.grads[name]
                     yield param, grad
+
+    def predict(self, inputs: Tensor) -> Tensor:
+        """
+        Feed inputs through network and produce predictions.
+        """
+        return self.forward(Tensor)

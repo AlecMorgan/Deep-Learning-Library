@@ -12,6 +12,10 @@ inputs -> Linear -> Tanh -> Linear -> output
 from typing import Dict, Callable
 import numpy as np
 from dl_lib.tensor import Tensor
+from dl_lib.activations import (
+    tanh, tanh_prime, relu, relu_prime, 
+    leaky_relu, leaky_relu_prime
+)
 
 
 class Layer:
@@ -92,22 +96,27 @@ class Activation(Layer):
         """
         return self.f_prime(self.inputs) * grad
 
-    
-def tanh(x: Tensor) -> Tensor:
-    """
-    Apply the hyperbolic tangent function to the
-    input tensor element-wise and return the result.
-    """
-    return np.tanh(x)
-
-def tanh_prime(x: Tensor) -> Tensor:
-    """
-    Return the derivative of the input's hyperbolic tangent.
-    """
-    y = tanh(x)
-    return 1 - y ** 2
-
-
 class Tanh(Activation):
     def __init__(self):
         super().__init__(tanh, tanh_prime)
+
+class Relu(Activation):
+    def __init__(self):
+        super().__init__(relu, relu_prime)
+
+class Leaky_Relu(Activation):
+    def __init__(self):
+        super().__init__(leaky_relu, leaky_relu_prime)
+
+    def forward(self, inputs: Tensor, neg_slope: float = .1) -> Tensor:
+        self.inputs = inputs
+        return self.f(inputs, neg_slope)
+
+    def backward(self, grad: Tensor, neg_slope: float = .1) -> Tensor:
+        """ 
+        if y = f(x) and x = g(z)
+        then dy/dz = f'(x) * g'(z).
+        This is simply the chain rule
+        applied element-wise.
+        """
+        return self.f_prime(self.inputs, neg_slope) * grad
