@@ -108,15 +108,15 @@ class Leaky_Relu(Activation):
     def __init__(self):
         super().__init__(leaky_relu, leaky_relu_prime)
 
-    def forward(self, inputs: Tensor) -> Tensor:
+    def forward(self, inputs: Tensor, neg_slope: float = .1) -> Tensor:
         self.inputs = inputs
-        return self.f(inputs)
+        return self.f(inputs, neg_slope)
 
-    def backward(self, grad: Tensor) -> Tensor:
+    def backward(self, grad: Tensor, neg_slope: float = .1) -> Tensor:
         """ 
         if y = f(x) and x = g(z)
         then dy/dz = f'(x) * g'(z).
         This is simply the chain rule
         applied element-wise.
         """
-        return self.f_prime(self.inputs) * grad
+        return self.f_prime(self.inputs, neg_slope) * grad

@@ -58,3 +58,18 @@ def leaky_relu_prime(x: Tensor, neg_slope: float = .1) -> Tensor:
     y[y > 0] = 1
     y[y < 0] = neg_slope
     return y
+
+
+def sigmoid(x: Tensor) -> Tensor:
+    """
+    Apply the sigmoid function to the input
+    tensor element-wise and return the result. 
+    """
+    return 1 / (1 + np.exp(-x))
+
+
+def sigmoid_prime(x: Tensor) -> Tensor:
+    """
+    Return the derivative of the input's sigmoid.
+    """
+    return 1
