@@ -13,7 +13,9 @@ from typing import Dict, Callable
 import numpy as np
 from dl_lib.tensor import Tensor
 from dl_lib.activations import (
-    tanh, tanh_prime, relu, relu_prime, 
+    tanh, tanh_prime, 
+    sigmoid, sigmoid_prime,
+    relu, relu_prime, 
     leaky_relu, leaky_relu_prime
 )
 
@@ -99,6 +101,10 @@ class Activation(Layer):
 class Tanh(Activation):
     def __init__(self):
         super().__init__(tanh, tanh_prime)
+
+class Sigmoid(Activation):
+    def __init__(self):
+        super().__init__(sigmoid, sigmoid_prime)
 
 class Relu(Activation):
     def __init__(self):
