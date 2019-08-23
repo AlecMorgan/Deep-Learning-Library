@@ -72,4 +72,5 @@ def sigmoid_prime(x: Tensor) -> Tensor:
     """
     Return the derivative of the input's sigmoid.
     """
-    return 1
+    y = sigmoid(x)
+    return y * (1 - y)
